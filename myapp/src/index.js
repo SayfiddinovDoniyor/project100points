@@ -9,6 +9,23 @@ const App = () => {
   const [names, setNames] = useState('');
   const [result, setResult] = useState('');
 
+  const generateRandomName = () => {
+    const syllables = [
+      "ab", "ul", "lo", "di", "yor", "bek", "an", "or", "no", "za", "sha", "ra",
+      "mi", "la", "zo", "ka", "na", "ur", "to", "mu", "li", "ro", "ta", "ga" ,"xon","jon"
+    ];
+  
+    const length = Math.floor(Math.random() * 3) + 2; 
+    let name = "";
+  
+    for (let i = 0; i < length; i++) {
+      name += syllables[Math.floor(Math.random() * syllables.length)];
+    }
+  
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+  
+
   const handleRandomize = () => {
     if (mode === 'numbers') {
       const minVal = parseInt(min);
@@ -28,6 +45,11 @@ const App = () => {
         setResult('❌ Please enter at least one name');
       }
     }
+    else if (mode === 'uzbek') {
+      const randomName = generateRandomName();
+      setResult(`Your baby's name is  ${randomName}`);
+    }
+    
   };
 
   return (
@@ -45,6 +67,8 @@ const App = () => {
           <option value="">-- Choose --</option>
           <option value="numbers">Numbers</option>
           <option value="names">Names</option>
+          <option value="uzbek">Generated Name</option>
+
         </select>
       </nav>
 
