@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
@@ -14,6 +14,7 @@ const App = () => {
       "ab", "ul", "lo", "di", "yor", "bek", "an", "or", "no", "za", "sha", "ra",
       "mi", "la", "zo", "ka", "na", "ur", "to", "mu", "li", "ro", "ta", "ga" ,"xon","jon"
     ];
+    
   
     const length = Math.floor(Math.random() * 3) + 2; 
     let name = "";
@@ -24,6 +25,38 @@ const App = () => {
   
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
+
+
+  const richNews = [
+    {
+      title: "Random Name Generator Added!",
+      description: "You can now create fun, made-up names with our new feature.",
+      image: "https://via.placeholder.com/500x250?text=Random+Name+Generator", // Replace with your image
+      type: "image",
+    },
+    {
+      title: "Video Demo of Number Randomizer",
+      description: "Watch how easy it is to get random numbers.",
+      video: "https://www.w3schools.com/html/mov_bbb.mp4", // Use your own hosted video later
+      type: "video",
+    },
+    {
+      title: "Sleek New UI",
+      description: "We’ve redesigned the site to be more modern and colorful.",
+      image: "https://via.placeholder.com/500x250?text=New+UI+Design",
+      type: "image",
+    },
+  ];
+
+  const [richNewsIndex, setRichNewsIndex] = useState(0);
+
+   useEffect(() => {
+  const interval = setInterval(() => {
+    setRichNewsIndex((prev) => (prev + 1) % richNews.length);
+  }, 5000); // change every 5 seconds
+  return () => clearInterval(interval);
+}, []);
+
   
 
   const handleRandomize = () => {
@@ -58,6 +91,9 @@ const App = () => {
         <h1>Randomizer</h1>
       </header>
 
+      
+
+
       <nav className="menu">
         <label>Select Type:</label>
         <select value={mode} onChange={(e) => {
@@ -71,6 +107,26 @@ const App = () => {
 
         </select>
       </nav>
+
+      <div className="news-carousel">
+  {richNews.map((item, index) => (
+    <div className="news-card" key={index}>
+      {item.type === "image" ? (
+        <img src={item.image} alt="News" className="news-card-image" />
+      ) : (
+        <video controls className="news-card-video">
+          <source src={item.video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
+      <div className="news-card-content">
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
 
       <main className="main-content">
         {mode === 'numbers' && (

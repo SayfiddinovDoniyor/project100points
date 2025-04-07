@@ -72,3 +72,60 @@ textarea {
   resize: none;
 }
 
+.rich-news-card {
+  max-width: 600px;
+  margin: 1rem auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  text-align: center;
+}
+
+.news-image, .news-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.news-content {
+  padding: 1rem;
+}
+.news-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+
+.news-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.news-card {
+  min-width: 300px;
+  max-width: 300px;
+  flex: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  overflow: hidden;
+  color: #fff;
+  scroll-snap-align: start;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.news-card-image,
+.news-card-video {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.news-card-content {
+  padding: 0.75rem 1rem;
+}
+
+
