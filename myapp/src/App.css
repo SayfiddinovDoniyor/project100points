@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  text-align: center;
+}
+
+.configurator {
+  margin-top: 20px;
+}
+
+.feature-selector {
+  margin-bottom: 20px;
+}
+
+.car-preview img {
+  width: 100%;
+  max-width: 400px;
+}
+

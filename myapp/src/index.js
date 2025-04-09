@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// App Component
 const App = () => {
   const [mode, setMode] = useState('');
   const [min, setMin] = useState('');
@@ -9,13 +10,14 @@ const App = () => {
   const [names, setNames] = useState('');
   const [result, setResult] = useState('');
 
+  // Function to generate random names
   const generateRandomName = () => {
     const syllables = [
       "ab", "ul", "lo", "di", "yor", "bek", "an", "or", "no", "za", "sha", "ra",
-      "mi", "la", "zo", "ka", "na", "ur", "to", "mu", "li", "ro", "ta", "ga" ,"xon","jon"
+      "mi", "la", "zo", "ka", "na", "ur", "to", "mu", "li", "ro", "ta", "ga", "xon", "jon"
     ];
-    const length = Math.floor(Math.random() * 3) + 2; 
-    let name = "";
+    const length = Math.floor(Math.random() * 3) + 2;
+    let name = '';
     for (let i = 0; i < length; i++) {
       name += syllables[Math.floor(Math.random() * syllables.length)];
     }
@@ -44,6 +46,7 @@ const App = () => {
   ];
 
   const [richNewsIndex, setRichNewsIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRichNewsIndex((prev) => (prev + 1) % richNews.length);
@@ -71,10 +74,11 @@ const App = () => {
       }
     } else if (mode === 'uzbek') {
       const randomName = generateRandomName();
-      setResult(`Your baby's name is  ${randomName}`);
+      setResult(`Your baby's name is ${randomName}`);
     }
   };
 
+  // Car Customizer Component
   const CarCustomizer = () => {
     const [color, setColor] = useState('red');
     const [rims, setRims] = useState('classic');
@@ -197,6 +201,7 @@ const App = () => {
   );
 };
 
+// ReactDOM entry point
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
