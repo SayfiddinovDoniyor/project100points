@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import FeatureSelector from './FeatureSelector';
-import CarPreview from './CarPreview';
+import React from 'react';
 
-const CarConfigurator = () => {
-  const [color, setColor] = useState('base');
-  
-  const handleColorChange = (selectedColor) => {
-    setColor(selectedColor);
-  };
-
+const CarConfigurator = ({ config, updateConfig }) => {
   return (
-    <div className="configurator">
-      <h2>Customize Your Car</h2>
-      <FeatureSelector 
-        label="Choose Color"
-        options={['base', 'red', 'blue']}
-        onChange={handleColorChange}
-      />
-      <CarPreview color={color} />
+    <div className="controls">
+      <label>
+        Color:
+        <select value={config.color} onChange={(e) => updateConfig('color', e.target.value)}>
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="black">Black</option>
+        </select>
+      </label>
+
+      <label>
+        Rims:
+        <select value={config.rims} onChange={(e) => updateConfig('rims', e.target.value)}>
+          <option value="classic">Classic</option>
+          <option value="sport">Sport</option>
+          <option value="luxury">Luxury</option>
+        </select>
+      </label>
     </div>
   );
 };
