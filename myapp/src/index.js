@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import Header from './CarComponents/Headr';  
+import Car from './CarComponents/Car';          
+import AddCar from './CarComponents/AddCar';    
+import { initialCars, additionalCars } from './CarSample';  
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-
-// App Component
-const App = () => {
+const RandomizerApp = () => {
   const [mode, setMode] = useState('');
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [names, setNames] = useState('');
   const [result, setResult] = useState('');
+  const [cars, setCars] = useState(initialCars);  
+  const [richNewsIndex, setRichNewsIndex] = useState(0);
 
-  // Function to generate random names
   const generateRandomName = () => {
     const syllables = [
       "ab", "ul", "lo", "di", "yor", "bek", "an", "or", "no", "za", "sha", "ra",
@@ -50,8 +49,6 @@ const App = () => {
     },
   ];
 
-  const [richNewsIndex, setRichNewsIndex] = useState(0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setRichNewsIndex((prev) => (prev + 1) % richNews.length);
@@ -83,48 +80,28 @@ const App = () => {
     }
   };
 
-  // Car Customizer Component
-  const CarCustomizer = () => {
-    const [color, setColor] = useState('red');
-    const [rims, setRims] = useState('classic');
-    const [interior, setInterior] = useState('leather');
+  const loadAdditionalCars = () => {
+    setCars(prevCars => ({ ...prevCars, ...additionalCars }));
+  };
 
-    return (
-      <div className="car-customizer">
-        <h2>Customize Your Dream Car</h2>
-        <label>
-          Color:
-          <select value={color} onChange={(e) => setColor(e.target.value)}>
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-            <option value="black">Black</option>
-          </select>
-        </label>
-        <label>
-          Rims:
-          <select value={rims} onChange={(e) => setRims(e.target.value)}>
-            <option value="classic">Classic</option>
-            <option value="sport">Sport</option>
-            <option value="luxury">Luxury</option>
-          </select>
-        </label>
-        <label>
-          Interior:
-          <select value={interior} onChange={(e) => setInterior(e.target.value)}>
-            <option value="leather">Leather</option>
-            <option value="fabric">Fabric</option>
-            <option value="alcantara">Alcantara</option>
-          </select>
-        </label>
-        <div className="car-preview">
-          <p>🚗 Your Car: {color} color, {rims} rims, {interior} interior</p>
-        </div>
-      </div>
-    );
+  const addCarToGallery = (car) => {
+    const newCar = { ['car' + Date.now()]: car };
+    setCars(prevCars => ({ ...prevCars, ...newCar }));
   };
 
   return (
     <div className="app">
+      <Header text="Vehicle Quick Info" />
+
+      <p className="App-intro">Some information about popular SUV and Crossover models.</p>
+
+      <div className="cars">
+        {Object.keys(cars).map(key => <Car key={key} meta={cars[key]} />)}
+      </div>
+
+      <div className="add-cars"><button onClick={loadAdditionalCars}>Load more...</button></div>
+      <AddCar addCar={addCarToGallery} />
+
       <header className="header">
         <h1>Randomizer</h1>
       </header>
@@ -199,17 +176,14 @@ const App = () => {
         )}
 
         <div className="result">{result}</div>
-
-        <CarCustomizer />
       </main>
     </div>
   );
 };
 
-// ReactDOM entry point
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RandomizerApp />
   </React.StrictMode>
 );
