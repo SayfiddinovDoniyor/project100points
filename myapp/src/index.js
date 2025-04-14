@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './components/App';
+
 // App Component
 const App = () => {
   const [mode, setMode] = useState('');
